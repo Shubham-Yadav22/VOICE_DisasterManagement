@@ -24,16 +24,34 @@ import {
 } from "@/components/ui/alert-dialog"
 import Image from "next/image"
 import { useToast } from "@/components/ui/use-toast"
-import { useState } from "react"
-import BluetoothChat from "./bluetooth-chat/page"
-import { MedicalInfo } from "@/components/medical-info"
-// import { BluetoothChat } from "@/components/bluetooth-chat"
+import { useState, useEffect } from "react"
+import dynamic from 'next/dynamic'
+
+// Dynamically import components that use browser APIs
+const BluetoothChat = dynamic(
+  () => import('./bluetooth-chat/page'),
+  { ssr: false }
+)
+
+const MedicalInfo = dynamic(
+  () => import('@/components/medical-info').then(mod => mod.MedicalInfo),
+  { ssr: false }
+)
 
 export default function Home() {
   const { toast } = useToast()
   const [isCalling, setIsCalling] = useState(false)
+  const [isBrowser, setIsBrowser] = useState(false)
+
+  // Set isBrowser to true once component mounts (client-side only)
+  useEffect(() => {
+    setIsBrowser(true)
+  }, [])
 
   const handleEmergencyCall = async () => {
+    // Only run this function in the browser
+    if (!isBrowser) return
+
     setIsCalling(true)
     try {
       // Get user's location if available
@@ -94,10 +112,10 @@ export default function Home() {
         })
       }
     } catch (error: any) {
-      console.error('Emergency call error:', error)
+      const e = error as Error
       toast({
         title: "Error",
-        description: error.message || "Failed to initiate emergency call. Please try again or contact support.",
+        description: e.message || "Failed to initiate emergency call. Please try again or contact support.",
         variant: "destructive",
       })
     } finally {
@@ -131,7 +149,7 @@ export default function Home() {
                   size="lg"
                   className="flex items-center gap-2 font-semibold animate-pulse"
                   onClick={handleEmergencyCall}
-                  disabled={isCalling}
+                  disabled={isCalling || !isBrowser}
                 >
                   <Siren className="h-5 w-5" />
                   {isCalling ? "Connecting..." : "Emergency Call"}
@@ -283,7 +301,7 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <FirstAidChatbot />
+                {isBrowser && <FirstAidChatbot />}
               </CardContent>
             </Card>
           </TabsContent>
@@ -300,7 +318,7 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <ShelterMap />
+                {isBrowser && <ShelterMap />}
               </CardContent>
             </Card>
           </TabsContent>
@@ -317,7 +335,7 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <OfflineSurvival />
+                {isBrowser && <OfflineSurvival />}
               </CardContent>
             </Card>
           </TabsContent>
@@ -334,7 +352,7 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <BluetoothChat />
+                {isBrowser && <BluetoothChat />}
               </CardContent>
             </Card>
           </TabsContent>
@@ -352,7 +370,7 @@ export default function Home() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <MedicalInfo />
+                  {isBrowser && <MedicalInfo />}
                 </CardContent>
               </Card>
 
@@ -435,7 +453,7 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <DonationSection />
+                {isBrowser && <DonationSection />}
               </CardContent>
             </Card>
           </TabsContent>
@@ -463,4 +481,3 @@ export default function Home() {
     </div>
   )
 }
-
