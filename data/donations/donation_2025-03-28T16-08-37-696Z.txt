@@ -1,0 +1,15 @@
+
+Donation Record
+===============
+Date: 2025-03-28T16:08:37.693Z
+Name: suraj singh
+Phone: 09170732347
+Address: madiyon gav
+
+Resources to Donate:
+- Clothes
+- Medicines
+
+
+
+===========================================
