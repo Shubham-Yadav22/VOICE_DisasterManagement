@@ -27,6 +27,8 @@ import { useToast } from "@/components/ui/use-toast"
 import { useState, useEffect } from "react"
 import dynamic from 'next/dynamic'
 
+
+
 // Dynamically import components that use browser APIs
 const BluetoothChat = dynamic(
   () => import('./bluetooth-chat/page'),
@@ -42,6 +44,14 @@ export default function Home() {
   const { toast } = useToast()
   const [isCalling, setIsCalling] = useState(false)
   const [isBrowser, setIsBrowser] = useState(false)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // safe to access window
+      console.log(window.innerWidth)
+    }
+  }, [])
+  
 
   // Set isBrowser to true once component mounts (client-side only)
   useEffect(() => {
