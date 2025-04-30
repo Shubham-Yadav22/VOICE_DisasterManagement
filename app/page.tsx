@@ -45,12 +45,12 @@ export default function Home() {
   const [isCalling, setIsCalling] = useState(false)
   const [isBrowser, setIsBrowser] = useState(false)
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // safe to access window
-      console.log(window.innerWidth)
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     // safe to access window
+  //     console.log(window.innerWidth)
+  //   }
+  // }, [])
   
 
   // Set isBrowser to true once component mounts (client-side only)
@@ -61,23 +61,26 @@ export default function Home() {
   const handleEmergencyCall = async () => {
     // Only run this function in the browser
     if (!isBrowser) return
+    if (typeof window === 'undefined') return
 
     setIsCalling(true)
     try {
       // Get user's location if available
       let location = ''
-      try {
-        const position = await new Promise<GeolocationPosition>((resolve, reject) => {
-          navigator.geolocation.getCurrentPosition(resolve, reject)
-        })
-        location = `${position.coords.latitude}, ${position.coords.longitude}`
-      } catch (error) {
-        console.log('Location not available:', error)
+      if (typeof window !== 'undefined' && 'geolocation' in navigator) {
+        try {
+          const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject)
+          })
+          location = `${position.coords.latitude}, ${position.coords.longitude}`
+        } catch (error) {
+          console.log('Location not available:', error)
+        }
       }
 
       // Prepare the request body
       const requestBody = {
-        phoneNumber: '+919170732347',
+        phoneNumber: '+919170732347', 
         emergencyType: 'General Emergency',
         location: location
       }
@@ -116,7 +119,7 @@ export default function Home() {
         }
         
         toast({
-          title: "Error",
+          title: "Error", 
           description: errorMessage,
           variant: "destructive",
         })
