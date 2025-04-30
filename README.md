@@ -85,7 +85,7 @@ VOICE_PROJECT/
 ### 📽️ Video Walkthrough
 
 > _Watch the demo video to see VOICE in action!_  
-> [![Watch the Demo](https://img.youtube.com/vi/Jy_rmr5Cxgc/maxresdefault.jpg)]([https://youtu.be/Jy_rmr5Cxgc])
+> [![Watch the Demo](https://img.youtube.com/vi/Jy_rmr5Cxgc/maxresdefault.jpg)](https://youtu.be/Jy_rmr5Cxgc)
 
 
 
