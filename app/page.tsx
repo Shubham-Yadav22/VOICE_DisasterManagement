@@ -3,11 +3,21 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { EmergencyServices } from "@/components/emergency-services"
-import { FirstAidChatbot } from "@/components/first-aid-chatbot"
-import { ShelterMap } from "@/components/shelter-map"
+const EmergencyServices = dynamic(() => import("@/components/emergency-services").then(mod => mod.EmergencyServices), { ssr: false });
+
+
+const ShelterMap = dynamic(() => import("@/components/shelter-map").then(mod => mod.ShelterMap), { ssr: false });
+const FirstAidChatbot = dynamic(() => import("@/components/first-aid-chatbot").then(mod => mod.FirstAidChatbot), { ssr: false });
+const DonationSection = dynamic(() => import("@/components/donation-section").then(mod => mod.DonationSection), { ssr: false });
+
+
+
+
+
+// import { FirstAidChatbot } from "@/components/first-aid-chatbot"
+// import { ShelterMap } from "@/components/shelter-map"
 import { OfflineSurvival } from "@/components/offline-survival"
-import { DonationSection } from "@/components/donation-section"
+// import { DonationSection } from "@/components/donation-section"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { AlertTriangle, Phone, MapPin, Shield, Heart, BookOpen, Siren, HandHelping, Bluetooth, Stethoscope, Activity } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -44,13 +54,6 @@ export default function Home() {
   const { toast } = useToast()
   const [isCalling, setIsCalling] = useState(false)
   const [isBrowser, setIsBrowser] = useState(false)
-
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     // safe to access window
-  //     console.log(window.innerWidth)
-  //   }
-  // }, [])
   
 
   // Set isBrowser to true once component mounts (client-side only)
