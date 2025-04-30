@@ -29,7 +29,7 @@ This app was initially developed during a hackathon with the mission to create a
 
 ## 🛠️ Tech Stack
 
-- **Frontend/Backend:** JavaScript, Node.js
+- **Frontend/Backend:** JavaScript, Node.js , Next.js , React.js 
 - **APIs Used:**  
   - [Twilio](https://www.twilio.com/) – for emergency SMS/calls  
   - [Hugging Face](https://huggingface.co/) – powering the first aid chatbot  
@@ -47,6 +47,7 @@ npm run dev
 
 ## 📁 Project Structure 
 
+```text
 VOICE_PROJECT/
 ├── disaster-management/
 │   ├── .next/                   # Next.js build output
@@ -78,12 +79,14 @@ VOICE_PROJECT/
 │   ├── tailwind.config.ts       # Tailwind CSS configuration
 │   └── tsconfig.json            # TypeScript configuration
 
+```
 ## 🎥 Demo
 
 ### 📽️ Video Walkthrough
 
 > _Watch the demo video to see VOICE in action!_  
-> 
+> [![Watch the Demo]](https://youtu.be/msyIT8Oxi1U)
+
 
 
 ---
