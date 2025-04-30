@@ -1,6 +1,6 @@
 # VOICE - Voice of Information in Critical Situations and Emergencies
 
-![Built with Node.js](https://img.shields.io/badge/Built%20with-Node.js-green?logo=node.js)
+![Built with Next.js](https://img.shields.io/badge/Built%20with-Node.js-green?logo=next.js)
 ![Hackathon Project](https://img.shields.io/badge/Hackathon-Project-blue)
 ![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen)
 
